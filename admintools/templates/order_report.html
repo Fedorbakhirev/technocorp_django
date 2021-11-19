@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}Отчет по заказам{% endblock %}
+{% block content %}
+    <div class="flex-1">
+        <section>
+            <h1 class="text-center text-blue font-bold text-4xl mb-5">Отчет по заказам</h1>
+            <form class="flex flex-col justify-center" method="post" autocomplete="off">
+                {% csrf_token %}
+                {% for f in form %}
+                    <div class="flex flex-col mt-2">
+                        <label for="{{ f.id_for_label }}" class="hidden">{{ f.label }}</label>
+                        {{ f }}
+                    </div>
+                {% endfor %}
+                <button type="submit" class="bg-blue text-white w-full sm:w-1/3 m-auto mt-3 py-2">
+                    Сформировать отчет
+                </button>
+                {% for error in form.non_field_errors %}
+                    <p class="text-alert text-center mt-4">{{ error }}</p>
+                {% endfor %}
+            </form>
+        </section>
+            <section>
+        {% if obj %}
+            <h1 class='text-3xl text-x-gray font-bold text-center mt-5'>Отчет</h1>
+            <div class="flex mt-10 mb-5">
+                <h3 class="font-semibold text-gray-600 text-xs uppercase w-1/4">Номер заказа</h3>
+                <h3 class="font-semibold text-center text-gray-600 text-xs uppercase w-1/4 hidden sm:block">Товары</h3>
+                <h3 class="font-semibold text-center text-gray-600 text-xs uppercase w-1/4 ">Дата Заказа
+                </h3>
+                <h3 class="font-semibold text-center text-gray-600 text-xs uppercase w-1/4">Итого</h3>
+            </div>
+            {% for item in obj %}
+                <div class="flex items-center hover:bg-gray-100 -mx-6 px-6 py-5 border-b-1">
+                    <div class="flex w-1/4">
+                        <div class="h-24 w-24 table">
+                            <div class='table-cell align-middle'>
+                                <p class="">Заказ №{{ item.id }}</p>
+                                <p>От: {{ item.customer_username }}</p>
+                            </div>
+                        </div>
+
+                    </div>
+                    <span class="text-center w-1/4 font-semibold text-sm hidden sm:block">
+                                                <div class="flex flex-col justify-between space-y-4 ml-4 flex-grow">
+                            <p>{{ item.products|linebreaksbr }}</p>
+                        </div>
+                    </span>
+                    <span class="text-center w-1/4 font-semibold text-sm">{{ item.created_at }}</span>
+                    <span class="text-center w-1/4 font-semibold text-sm">{{ item.price }} Р</span>
+                </div>
+            {% endfor %}
+        {% endif %}
+        </section>
+    </div>
+{% endblock %}

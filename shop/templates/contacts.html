@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} {{ block.SUPER }} Главная {% endblock %}
+
+{% block content %}
+    <div class="flex-1">
+        <section class="flex justify-between items-center h-full">
+            <div class="max-w-4xl small:max-w-lg mx-auto md:mx-0 space-y-5">
+                <h1 class='text-blue sm:text-7xl font-bold mb-8 text-center small:text-left text-5xl'>Контакты</h1>
+                <div class="flex items-center">
+                    <img src="{% static 'img/phone.svg' %}" alt="" class="w-8 mr-5">
+                    <a href="tel:+79991234567">+7 (999) 123-45-67</a>
+                </div>
+                <div class="flex items-center">
+                    <img src="{% static 'img/mail.svg' %}" alt="" class="w-8 mr-5">
+                    <a href="mailto:contacts@techcorp.ru">contacts@techcorp.ru</a>
+                </div>
+                <div class="flex items-center">
+                    <img src="{% static 'img/geo.svg' %}" alt="" class="w-8 mr-5">
+                    <a href="https://yandex.ru/maps/2/saint-petersburg/house/ulitsa_kollontay_23k1/Z0kYcgBjSUACQFtjfXVweHpqYA==/?ll=30.473055%2C59.919694&z=17.09" target="_blank">ул. Коллонтай, д.23к1. Офис 204</a>
+                </div>
+            </div>
+            <img src="{% static 'img/contacts.png' %}" alt=""
+                 class='lg:max-w-3xl hidden md:max-w-xl md:max-h-auto small:block'>
+        </section>
+    </div>
+{% endblock %}

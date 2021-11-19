@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Продукция{% endblock %}
+{% block content %}
+    <div class="flex-1">
+        <section class="bg-white dark:bg-gray-900">
+            <div class="container px-6 py-0 mx-auto">
+                <div class="lg:flex lg:-mx-2">
+                    <div class="space-y-3 lg:w-1/5 lg:px-2 lg:space-y-4">
+                        <h1 class="text-blue font-bold text-2xl">Категории</h1>
+                        <ul class="menu">
+                            <a href="{% url 'shop:product_list' %}" class="">
+                                <li class="border-t-1 border-b-1 border-x-gray py-3 px-3 hover:bg-blue hover:text-white duration-300">
+                                    Все товары
+                                </li>
+                            </a>
+                            {% for category in categories %}
+                                <a href="{{ category.get_absolute_url }}">
+                                    <li class="border-b-1 border-x-gray py-3 px-3 hover:bg-blue hover:text-white duration-300">{{ category.title }}</li>
+                                </a>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <div class="mt-6 lg:mt-0 lg:px-2 lg:w-4/5 ">
+                        <h1 class="text-blue font-bold text-2xl mb-4">
+                            {% if category.title %}{{ category.title }}{% else %}Все товары{% endif %}</h1>
+                        <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                            {% for product in products %}
+                                <a href="{% url 'shop:product_detail' product.id product.slug %}"
+                                   class="hover:text-blue duration-300 border-1">
+                                    <div class="flex flex-col items-center justify-center w-full max-w-lg mx-auto">
+                                        <img class="object-cover w-full rounded-md h-28 xl:h-28"
+                                             src="{% if product.image %}{{ product.image.url }}{% else %}{% endif %}"
+                                             alt="T-Shirt">
+                                        <h4 class="mt-2 text-lg">{{ product.title }}</h4>
+                                        <p class="text-blue text-xl font-bold">{{ product.price }} Р</p>
+                                    </div>
+                                </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}

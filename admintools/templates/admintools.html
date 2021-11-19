@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Логин{% endblock %}
+{% block content %}
+    <div class="flex-1">
+        <section>
+            <h1 class="text-center text-blue font-bold text-4xl mb-5">Авторизация</h1>
+            <ul class="text-center space-x-2">
+                <a href="{% url 'admintools:orderreport' %}" class=""><li class="block mx-auto bg-blue text-white py-2 px-3 w-48">Отчеты по заказам</li></a>
+                <a href="{% url 'admin:index' %}"><li class="block mx-auto bg-blue text-white py-2 px-3 w-48">Админ-панель</li></a>
+                <a href="{% url 'shop:user_orders' %}"><li class="block mx-auto bg-blue text-white py-2 px-3 w-48">Ваши заказы</li></a>
+            </ul>
+        </section>
+    </div>
+{% endblock %}

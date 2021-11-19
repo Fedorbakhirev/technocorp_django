@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} {{ block.SUPER }} Главная {% endblock %}
+
+{% block content %}
+    <div class="flex-1">
+        <section class="flex justify-between items-start">
+            <div class="left-side max-w-4xl small:max-w-lg mx-auto md:mx-0">
+                <h1 class='text-blue text-7xl font-bold mb-8 text-center small:text-left'>Магазин оптовых товаров
+                </h1>
+                <p class="mb-12 text-center small:text-left">Компания «TECHNOCORP» является дистрибьютором и
+                    импортером
+                    телекоммуникационного
+                    оборудования на
+                    территории России и стран СНГ. Основное направление нашей деятельности — это импорт и
+                    дистрибуция
+                    различного оборудования для корпоративных клиентов. Мы поставляем оборудование известных мировых
+                    брендов, которые зарекомендовали себя на рынке как надежные и высокотехнологичные компании.</p>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'shop:product_list' %}"
+                       class="bg-blue text-white px-6 py-4 block text-center small:text-left small:inline">Посмотреть
+                        товары</a>
+                {% else %}
+                    <a href="{% url 'shop:register' %}"
+                       class="bg-blue text-white px-6 py-4 block text-center small:text-left small:inline">Зарегистрироваться</a>
+                {% endif %}
+            </div>
+            <img src="{% static 'img/hero.png' %}" alt=""
+                 class='lg:max-w-3xl hidden md:max-w-xl md:max-h-auto small:block'>
+        </section>
+        <section class="mb-14 mt-20">
+            <h2 class='text-center mb-10  font-bold text-2xl'>Преимущества</h2>
+            <div class="flex flex-wrap justify-between">
+                <div class="benefist_item border-2 w-full medium:max-w-sm py-8 px-8 mb-5">
+                    <img src="{% static 'img/time.svg' %}" alt="" class="m-auto">
+                    <h3 class="text-center mt-5">Отгрузка товара от 1 дня. Товар со склада в Китае доставляется
+                        от 5
+                        дней.</h3>
+                </div>
+                <div class="benefist_item border-2 w-full medium:max-w-sm py-8 px-8 mb-5">
+                    <img src="{% static 'img/card.svg' %}" alt="" class="m-auto">
+                    <h3 class="text-center mt-5">Различные способы оплаты для клиентов и партнеров. Скидки и
+                        ретробонусы
+                        для постоянных клиентов</h3>
+                </div>
+                <div class="benefist_item border-2 w-full medium:max-w-sm py-8 px-8 mb-5">
+                    <img src="{% static 'img/map.svg' %}" alt="" class="m-auto">
+                    <h3 class="text-center mt-5">Доставляем по всей РФ и СНГ. Работаем с крупнейшими
+                        транспортными
+                        компаниями </h3>
+                </div>
+            </div>
+        </section>
+        <section class="flex flex-wrap justify-between items-center">
+            <a href="{% url 'shop:contacts' %}"
+               class="flex-auto text-white bg-blue py-6 px-24 x-small:mr-5 text-center mb-5">Связаться</a>
+            {% if user.is_authenticated %}
+                <a href="{% url 'shop:product_list' %}"
+                   class="flex-auto text-black bg-light-gray py-6 px-24 text-center mb-5">Посмотреть товары</a>
+            {% else %}
+                <a href="{% url 'shop:register' %}"
+                   class="flex-auto text-black bg-light-gray py-6 px-24 text-center mb-5">Оставить
+                    заявку на
+                    регистрацию</a>
+            {% endif %}
+
+        </section>
+    </div>
+{% endblock %}

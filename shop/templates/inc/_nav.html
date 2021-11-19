@@ -1,0 +1,40 @@
+{% load static %}
+
+<nav class='mt-7 flex justify-between flex-wrap mb-12 items-center text-sm'>
+    <a href="{% url 'shop:home' %}"><img src="{% static 'img/logo.svg' %}" alt="Logo" class='w-52 pb-5 pr-2'></a>
+    <ul class='flex pb-5 pr-2'>
+        <li class="mr-7"><a href="{% url 'shop:home' %}">Главная</a></li>
+        <li class="mr-7"><a href="{% url 'shop:product_list' %}">Продукция</a></li>
+        <li><a href="{% url 'shop:contacts' %}">Контакты</a></li>
+    </ul>
+    <ul class="flex flex-wrap items-center pb-5">
+        {% if user.is_authenticated %}
+            {% if user.is_superuser %}
+                <li class="mr-7"><a href="{% url 'admintools:admintools' %}">Добро пожаловать, <span class="text-blue">{{ user.username }}</span></a>
+                </li>
+            {% else %}
+                <li class="mr-7"><a href="{% url 'shop:user_orders' %}">Добро пожаловать, <span class="text-blue">{{ user.username }}</span></a>
+                </li>
+            {% endif %}
+            <li class="mr-7 "><a href="{% url 'shop:logout' %}">Выйти</a></li>
+            <a href="{% url 'cart:cart_detail' %}">
+                <li class="bg-blue text-white px-5 py-2">
+                    {% with total_items=cart|length %}
+                        {% if cart|length > 0 %}
+                            <a href="{% url 'cart:cart_detail' %}">
+                                В корзине:
+                                {{ total_items }} шт {{ cart.get_total_price }} Р
+                            </a>
+                        {% else %}
+                            Корзина пуста
+                        {% endif %}
+                    {% endwith %}
+                </li>
+            </a>
+        {% else %}
+            <li class="mr-7"><a href="{% url 'shop:login' %}">Вход</a></li>
+            <li class="mr-7"><a href="{% url 'shop:register' %}">Регистрация</a></li>
+        {% endif %}
+
+    </ul>
+</nav>

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Успешно{% endblock %}
+{% block content %}
+        <div class="flex-1">
+            <section class="flex justify-between items-center h-full">
+                <div class="left-side max-w-4xl small:max-w-lg mx-auto md:mx-0">
+                    <h1 class='text-blue text-4xl font-bold mb-8 text-center small:text-left'>{{ title }}</h1>
+                    <p class="mb-12 text-center small:text-left">{{ description }}</p>
+                </div>
+                <img src="{% static 'img/success.png' %}" alt="" class='lg:max-w-3xl hidden md:max-w-xl md:max-h-auto small:block'>
+            </section>
+        </div>
+{% endblock %}
